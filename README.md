@@ -1,1 +1,1 @@
-# SKE-Rest
+# SKE-Restaurant
