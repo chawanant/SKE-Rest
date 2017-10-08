@@ -1,58 +1,78 @@
-package restaurant;
 import java.util.Scanner;
-public class Ske {
-	public static void main(String[]args){
-		// TODO Auto-generated method stub
-		Scanner sc = new Scanner(System.in);
-		System.out.print("---------Welcome to SKE Restaurant---------\n");
-		System.out.printf("1.) Pizza\t %5d Bath.%n",250);
-		System.out.printf("2.) Chickens\t %5d Bath.%n",120);
-		System.out.printf("3.) Coke\t %5d Bath.%n",45);
-		System.out.printf("4.) Total\n");
-		System.out.printf("5.) Exit\n");
-	int c=0;
-	int p = 0;
-	int ch = 0;
-	int ck = 0;
-	int t = 0;
-	while (true) {
-		System.out.print("Enter your Choice: ");
-		c=sc.nextInt();
-		if(c==5) {
-			break;	
-		}
-		else if (c==4) {
-			menu(p,ck,ch);
-		}
-		else{
-			System.out.print("Enter Quantity");
-			
-			int q=sc.nextInt();
-			if (c==1) {
-				p=p+q;	
-			}
-			else if (c==2) {
-				ch=ch+q;
-			}
-			else if (c==3) {
-				ck=ck+q;
-			}
-		}
-	}
-	System.out.print("=====Thank you=====");
-	}
-	public static void menu(int p,int ck,int ch) {
-		System.out.print("+------Menu------+----Quantity---+-----Price----+\n");
-		if (p>0)
-			System.out.printf("|\tPizza\t |\t%2d\t |\t%5d\t|\n",p,p*250);
-		if (ch>0)
-			System.out.printf("|\tChickens\t |\t%2d\t |\t%5d\t|\n",ch,ch*120);
-		if (ck>0)
-			System.out.printf("|\tCoke\t |\t%2d\t |\t%5d\t|\n",ck,ck*45);
-		System.out.print("+----------------+--------------+---------------+\n");
-		System.out.printf("|\tTotal\t\t\t %11d\t|\n",p*250+ch*120+ck*45);
-		System.out.print("+-----------------------------------------------+\n");
-		}
+public class Restaurantske {
+	static Scanner console = new Scanner(System.in);
+	static String[] menuitem = {"Pizza","Chicken","Burger","Coke"};
+	static int[] price = {250,140,135,35};
+	static int[]quantity = {0,0,0,0};
 
-	}
+   public static int getIntReply(String prompt) {
+	System.out.print(prompt);
+	int c = console.nextInt();
+	return c;
+}
+   static void menu() {
+	   System.out.print("---------Welcome to SKE Restaurant---------\n");
+	   for (int i =0;i<menuitem.length;i++) {
+		   System.out.printf("%d.) %s\t\t%5d Baht.\n",i+1,menuitem[i],price[i] );
+	   }
+	   System.out.printf("%d.)Total\n",menuitem.length+1);
+	   System.out.printf("%d.)Exit\n",menuitem.length+2);
+	   System.out.println("");
+   }
+   static int Total() {
+   	int sum=0;
+   	for(int i=0;i<menuitem.length;i++) {
+   		sum += price[i]*quantity[i];
+   	}
+   	return sum;
+   }
+   public static void Menutable() {
+	   System.out.print("+--------------------------------+\n");
+	   System.out.print("+\tMenu\t|Quantity| Price +\n");
+	   System.out.print("+--------------------------------+\n");
+       for(int i=0;i<menuitem.length;i++) {
+    	   if(price[i]*quantity[i]>0) 
+    		  System.out.printf("|\t%-8s|  %d\t |  %d\t |\n", menuitem[i], quantity[i], quantity[i] * price[i]);
+       }
+       System.out.print("+--------------------------------+\n");
+       System.out.printf("|\tTotal\t\t    %d  |\n",Total());
+       System.out.print("+--------------------------------+\n");
+   }
+    
+    
+	public static void main(String[] args) {
+		menu();
+		int quan=0;
+		while (true) {
+			int choice= getIntReply("Enter your Choice: ");
+			if(choice==6) {
+				break;	
+			}
+			else if (choice==1 || choice==2 ||choice==3||choice==4) {
+				quan=getIntReply("Enter Quantity: ");
+				System.out.println("");
+				if(choice==1) {
+					quantity[0] += quan;
+				}
+				else if (choice==2) {
+					quantity[1]+=quan;
+				}
+				else if (choice==3) {
+					quantity[2]+=quan;
+				}
+				else if (choice==4) {
+					quantity[3]+=quan;
+				}
+				
+			}
+			else if(choice==5) {
+				Menutable();
+				System.out.print("");
+			}
+				
 
+	} 
+		System.out.println("\tTHANK YOU FOR DINNING WITH US");
+		System.out.println("\t      PLEASE COME AGAIN");
+
+	}}
